@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="main_activity_image">placeholder image</string>
+    <string name="main_add_task_button">ADD TASK</string>
+    <string name="main_all_tasks_button">ALL TASKS</string>
+    <string name="main_textView">My Tasks</string>
+    <string name="submitted_confirmation">Submitted!</string>
+    <string name="all_tasks_textview">All Tasks</string>
+    <string name="all_tasks_image_placeholder">Image placeholder for all tasks page.</string>
+    <string name="add_task_text_box_task_title">Task Title\n</string>
+    <string name="add_task_text_view">Add Task</string>
+    <string name="add_task_task_description">Do Something</string>
+    <string name="add_task_add_task_button">Add Task</string>
+    <string name="add_task_task_title">Task Title</string>
+    <string name="add_task_task_description_title">Task Description</string>
+    <string name="add_task_task_title_text_box">My Task</string>
+    <string name="settings_button_description">settings</string>
+    <string name="settings_nickname_hint">Matt Damon</string>
+    <string name="nickname_title">NickName</string>
+    <string name="settings_save_nickname_button">Save</string>
+    <string name="no_task_name">No Task Name</string>
+    <string name="no_task_detail">No Task Detail</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blank_task_name">Blank Task Name</string>
+</resources>
