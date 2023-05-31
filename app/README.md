@@ -69,3 +69,11 @@
 ### New Task Detail Page
 
 ![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab29-3.png)
+
+
+## Lab 31 May 30, 2023
+
+- Added all tests to project
+  - ActivityDisplayTest
+  - AllElementsDisplayedTest
+  - UsernamHomepageTest
