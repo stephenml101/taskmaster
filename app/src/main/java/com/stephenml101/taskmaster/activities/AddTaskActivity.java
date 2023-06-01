@@ -1,7 +1,7 @@
 package com.stephenml101.taskmaster.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +14,13 @@ import android.widget.Toast;
 
 import com.stephenml101.taskmaster.MainActivity;
 import com.stephenml101.taskmaster.R;
-import com.stephenml101.taskmaster.database.TaskMasterDatabase;
 import com.stephenml101.taskmaster.models.Tasks;
 
 import java.util.Date;
 
 public class AddTaskActivity extends AppCompatActivity {
 public static final String TAG = "AddTaskActivity";
-TaskMasterDatabase taskMasterDatabase;
+
 Spinner addTaskSpinner;
 
     @Override
@@ -29,13 +28,7 @@ Spinner addTaskSpinner;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         addTaskSpinner = findViewById(R.id.AddTaskEnumSpinner);
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        MainActivity.DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
+
 
         setUpAddTaskButton();
         setUpTaskSpinner();
@@ -50,7 +43,7 @@ Spinner addTaskSpinner;
                    new Date(),
                    Tasks.TaskStateEnum.fromString(addTaskSpinner.getSelectedItem().toString())
            );
-           taskMasterDatabase.taskDao().insertATask(newTask);
+//           taskMasterDatabase.taskDao().insertATask(newTask);
            Toast.makeText(this, "Task saved!", Toast.LENGTH_LONG).show();
         });
 
