@@ -3,7 +3,7 @@ package com.stephenml101.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
+
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +20,6 @@ import com.stephenml101.taskmaster.activities.AllTasksActivity;
 import com.stephenml101.taskmaster.activities.SettingsPageActivity;
 import com.stephenml101.taskmaster.activities.TaskDetailActivity;
 import com.stephenml101.taskmaster.adapters.TaskListRecyclerViewAdapter;
-import com.stephenml101.taskmaster.database.TaskMasterDatabase;
 import com.stephenml101.taskmaster.models.Tasks;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
     public static final String TASK_DETAIL_EXTRA_TAG = "taskDetail";
     private final String TAG = "MainActivity";
-    TaskMasterDatabase taskMasterDatabase;
     public static final String DATABASE_NAME = "task_master_database";
     List<Tasks> tasks;
     TaskListRecyclerViewAdapter adapter;
@@ -40,18 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        taskMasterDatabase = Room.databaseBuilder(
-                getApplicationContext(),
-                TaskMasterDatabase.class,
-                DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
+        // TODO SETUP DATABASE QUERY
 
-        tasks = taskMasterDatabase.taskDao().findAllTasks();
+//        tasks = taskMasterDatabase.taskDao().findAllTasks();
 
-        Log.e(TAG, "DATABASE INSTANTIATED!!");
-
+        tasks = new ArrayList<>();
 
         setUpSettingsButton();
         setUpRecyclerView();
@@ -63,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         tasks.clear();
-        tasks.addAll(taskMasterDatabase.taskDao().findAllTasks());
+        // TODO SETUP
+//        tasks.addAll(taskMasterDatabase.taskDao().findAllTasks());
         adapter.notifyDataSetChanged();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userNickname = preferences.getString(SettingsPageActivity.USER_NICKNAME_TAG, "No nickname");
