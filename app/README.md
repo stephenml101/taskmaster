@@ -77,3 +77,14 @@
   - ActivityDisplayTest
   - AllElementsDisplayedTest
   - UsernamHomepageTest
+
+## Lab 32 May 31, 2023
+
+- Refactored to add all data to DynamoDB
+- All tasks show up
+- Description also shows up when task is clicked
+- Date was added to task as well
+
+### Task with date showing
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab32-1.png)
