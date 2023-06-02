@@ -15,12 +15,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.stephenml101.taskmaster.activities.AddTaskActivity;
 import com.stephenml101.taskmaster.activities.AllTasksActivity;
 import com.stephenml101.taskmaster.activities.SettingsPageActivity;
-import com.stephenml101.taskmaster.activities.TaskDetailActivity;
 import com.stephenml101.taskmaster.adapters.TaskListRecyclerViewAdapter;
-import com.stephenml101.taskmaster.models.Tasks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_DETAIL_EXTRA_TAG = "taskDetail";
     private final String TAG = "MainActivity";
     public static final String DATABASE_NAME = "task_master_database";
-    List<Tasks> tasks;
+    List<Task> tasks;
     TaskListRecyclerViewAdapter adapter;
     SharedPreferences preferences;
     @Override
@@ -54,8 +55,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         tasks.clear();
+
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success -> {
+                    Log.i(TAG, "Read tasks successfully!");
+                    tasks.clear();
+                    for(Task databaseTask : success.getData()){
+                        tasks.add(databaseTask);
+                    }
+                    runOnUiThread(()-> adapter.notifyDataSetChanged());
+                },
+                failure -> Log.i(TAG, "Did not read tasks successfully!")
+        );
+
         // TODO SETUP
 //        tasks.addAll(taskMasterDatabase.taskDao().findAllTasks());
+
+
         adapter.notifyDataSetChanged();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userNickname = preferences.getString(SettingsPageActivity.USER_NICKNAME_TAG, "No nickname");

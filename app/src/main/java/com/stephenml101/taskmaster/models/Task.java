@@ -4,7 +4,7 @@ package com.stephenml101.taskmaster.models;
 import java.util.Date;
 
 
-public class Tasks {
+public class Task {
 
 
 
@@ -17,7 +17,7 @@ public class Tasks {
 
 
 
-    public Tasks(String name, String description, Date startBy, TaskStateEnum state) {
+    public Task(String name, String description, Date startBy, TaskStateEnum state) {
         this.name = name;
         this.description = description;
         this.startBy = startBy;

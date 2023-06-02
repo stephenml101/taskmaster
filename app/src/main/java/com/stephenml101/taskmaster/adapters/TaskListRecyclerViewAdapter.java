@@ -2,6 +2,7 @@ package com.stephenml101.taskmaster.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +11,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Task;
 import com.stephenml101.taskmaster.MainActivity;
 import com.stephenml101.taskmaster.R;
 import com.stephenml101.taskmaster.activities.TaskDetailActivity;
-import com.stephenml101.taskmaster.models.Tasks;
 
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 // Only purpose of this class is to manage RecyclerView
 
 
 public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRecyclerViewAdapter.TaskListViewHolder> {
-    private List<Tasks> tasks;
+    public static final String TAG = "ProductListRecyclerViewAdapter";
+    private List<Task> tasks;
     Context callingActivity;
 
-    public TaskListRecyclerViewAdapter(List<Tasks> tasks, Context callingActivity){
+    public TaskListRecyclerViewAdapter(List<Task> tasks, Context callingActivity){
         this.tasks = tasks;
         this.callingActivity = callingActivity;
     }
@@ -50,7 +59,24 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextView);
         String taskName = tasks.get(position).getName();
         String taskDetail = tasks.get(position).getDescription();
-        String taskFragmentText = position + ". " + taskName;
+
+        DateFormat dateCreatedIso8601InputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        dateCreatedIso8601InputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        DateFormat dateCreatedOutputFormat = new SimpleDateFormat("MM-dd-yyyy");
+        dateCreatedOutputFormat.setTimeZone(TimeZone.getDefault());
+        String dateCreatedCreateString = "";
+
+        try {
+            Date dateCreatedJavaDate = dateCreatedIso8601InputFormat.parse(tasks.get(position).getDateCreated().format());
+                    if(dateCreatedCreateString != null){
+                        dateCreatedCreateString = dateCreatedOutputFormat.format(dateCreatedJavaDate);
+                    }
+        } catch (ParseException e) {
+            Log.e(TAG, "Failed to format date " + e);
+            e.printStackTrace();
+        }
+
+        String taskFragmentText = position + ". " + taskName + "     " + dateCreatedCreateString;
         taskFragmentTextView.setText(taskFragmentText);
 
         View taskViewHolder = holder.itemView;
