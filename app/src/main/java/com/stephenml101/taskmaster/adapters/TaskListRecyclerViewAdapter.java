@@ -1,5 +1,6 @@
 package com.stephenml101.taskmaster.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 // Only purpose of this class is to manage RecyclerView
@@ -30,7 +32,7 @@ import java.util.TimeZone;
 
 public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRecyclerViewAdapter.TaskListViewHolder> {
     public static final String TAG = "ProductListRecyclerViewAdapter";
-    private List<Task> tasks;
+    private final List<Task> tasks;
     Context callingActivity;
 
     public TaskListRecyclerViewAdapter(List<Task> tasks, Context callingActivity){
@@ -56,21 +58,19 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
 
     @Override
     public void onBindViewHolder(@NonNull TaskListViewHolder holder, int position) {
-        TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextView);
+        TextView taskFragmentTextView = holder.itemView.findViewById(R.id.taskFragmentTextView);
         String taskName = tasks.get(position).getName();
         String taskDetail = tasks.get(position).getDescription();
 
         DateFormat dateCreatedIso8601InputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
         dateCreatedIso8601InputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        DateFormat dateCreatedOutputFormat = new SimpleDateFormat("MM-dd-yyyy");
+        @SuppressLint("SimpleDateFormat") DateFormat dateCreatedOutputFormat = new SimpleDateFormat("MM-dd-yyyy");
         dateCreatedOutputFormat.setTimeZone(TimeZone.getDefault());
         String dateCreatedCreateString = "";
 
         try {
             Date dateCreatedJavaDate = dateCreatedIso8601InputFormat.parse(tasks.get(position).getDateCreated().format());
-                    if(dateCreatedCreateString != null){
-                        dateCreatedCreateString = dateCreatedOutputFormat.format(dateCreatedJavaDate);
-                    }
+            dateCreatedCreateString = dateCreatedOutputFormat.format(Objects.requireNonNull(dateCreatedJavaDate));
         } catch (ParseException e) {
             Log.e(TAG, "Failed to format date " + e);
             e.printStackTrace();

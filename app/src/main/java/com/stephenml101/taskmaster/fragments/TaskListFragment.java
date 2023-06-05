@@ -33,9 +33,8 @@ public class TaskListFragment extends Fragment {
      * @return A new instance of fragment TaskListFragment.
      */
     public static TaskListFragment newInstance(String param1, String param2) {
-        TaskListFragment fragment = new TaskListFragment();
 
-        return fragment;
+        return new TaskListFragment();
     }
 
     @Override

@@ -43,27 +43,6 @@ ArrayList<Team> team;
         teamSpinner = findViewById(R.id.AddTaskTeamSpinner);
         teamNames = new ArrayList<>();
         team = new ArrayList<>();
-//        Team newTeam1 = Team.builder()
-//                        .name("The Best Team")
-//                        .build();
-//        Team newTeam2 = Team.builder()
-//                .name("Team Awesome")
-//                .build();
-//        Team newTeam3 = Team.builder()
-//                .name("Task Masterpieces")
-//                .build();
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTeam1),
-//                success -> {},
-//                failure -> {});
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTeam2),
-//                success -> {},
-//                failure -> {});
-//        Amplify.API.mutate(
-//                ModelMutation.create(newTeam3),
-//                success -> {},
-//                failure -> {});
 
         Amplify.API.query(
                 ModelQuery.list(Team.class),

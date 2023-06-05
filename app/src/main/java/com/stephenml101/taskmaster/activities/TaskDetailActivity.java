@@ -1,15 +1,13 @@
 package com.stephenml101.taskmaster.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.stephenml101.taskmaster.MainActivity;
 import com.stephenml101.taskmaster.R;
-
-import java.awt.font.TextAttribute;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
@@ -29,7 +27,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             taskNameString = callingIntent.getStringExtra(MainActivity.TASK_NAME_EXTRA_TAG);
         }
 
-        TextView taskDetailsInfoTextView = (TextView) findViewById(R.id.taskDetailTitle);
+        TextView taskDetailsInfoTextView = findViewById(R.id.taskDetailTitle);
         if(taskNameString != null){
             taskDetailsInfoTextView.setText(taskNameString);
         } else {
@@ -45,7 +43,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             taskDetail= callingIntent.getStringExtra(MainActivity.TASK_DETAIL_EXTRA_TAG);
         }
 
-        TextView taskDetailsInfoTextView = (TextView) findViewById(R.id.taskDetailTextView);
+        TextView taskDetailsInfoTextView = findViewById(R.id.taskDetailTextView);
         if(taskDetail != null){
             taskDetailsInfoTextView.setText(taskDetail);
         } else {
