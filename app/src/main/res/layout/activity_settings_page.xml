@@ -42,10 +42,21 @@
         android:id="@+id/settingsSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="72dp"
         android:text="@string/settings_save_nickname_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SettingsTeamSpinner" />
+
+    <Spinner
+        android:id="@+id/SettingsTeamSpinner"
+        android:layout_width="330dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsNicknameTitleInputTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
