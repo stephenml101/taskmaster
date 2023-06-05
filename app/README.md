@@ -88,3 +88,16 @@
 ### Task with date showing
 
 ![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab32-1.png)
+
+## Lab 33
+
+- Completed Teams Class and populated task in database
+- Still need to add to settings page
+
+### Team View
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab33-1.png)
+
+### Database with ID
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab33-2.png)
