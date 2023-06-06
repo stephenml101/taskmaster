@@ -101,3 +101,12 @@
 ### Database with ID
 
 ![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab33-2.png)
+
+
+## Lab 34
+
+- Added to Google Play Store. See screenshot below:
+
+### Google Playstore Screenshot
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab34-1.png)
