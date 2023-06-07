@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.stephenml101.taskmaster.activities.AddTaskActivity;
 import com.stephenml101.taskmaster.activities.AllTasksActivity;
 import com.stephenml101.taskmaster.activities.SettingsPageActivity;
 import com.stephenml101.taskmaster.adapters.TaskListRecyclerViewAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +40,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO SETUP DATABASE QUERY
+//        Amplify.Auth.signUp("stephenlevesque2@gmail.com", // user email address as username in Cognito calls
+//                "steelers2", // Cognito's default password policy is 8 characters, no other requirements
+//                AuthSignUpOptions.builder()
+//                        .userAttribute(AuthUserAttributeKey.email(), "stephenlevesque2@gmail.com")
+//                        .userAttribute(AuthUserAttributeKey.nickname(), "Matt Damon")
+//                        .build(),
+//                good -> {
+//                    Log.i(TAG, "Signup succeeded: " + good.toString());
+//                },
+//                bad -> {
+//                    Log.i(TAG, "Signup failed with username: " + "stephenlevesque2@gmail.com" + "with this message: " + bad.toString());
+//                }
+//        );
 
-//        tasks = taskMasterDatabase.taskDao().findAllTasks();
 
         tasks = new ArrayList<>();
 
