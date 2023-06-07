@@ -110,3 +110,39 @@
 ### Google Playstore Screenshot
 
 ![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab34-1.png)
+
+
+## Lab 36 
+
+- Cognito added with signup page 
+- Signup verification page added
+- Login page added
+- Display username at home page
+- Logout added
+
+### Username
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-1.png)
+
+### Signup
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-2.png)
+
+### Verification email
+
+![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-3.png)
+
+### Verification Entered
+
+![Photo 4](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-4.png)
+
+### Login Page
+
+![Photo 5](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-5.png)
+
+
+### Homepage with name display
+
+- TODO: Adjust height so all of name displays
+
+![Photo 6](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-6.png)
