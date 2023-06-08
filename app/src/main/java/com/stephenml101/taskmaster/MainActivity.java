@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.auth.AuthUserAttributeKey;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.stephenml101.taskmaster.activities.AddTaskActivity;
@@ -23,7 +21,9 @@ import com.stephenml101.taskmaster.activities.AllTasksActivity;
 import com.stephenml101.taskmaster.activities.SettingsPageActivity;
 import com.stephenml101.taskmaster.adapters.TaskListRecyclerViewAdapter;
 
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setUpAllTasksButton();
 
     }
+
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     @Override
     protected void onResume() {
