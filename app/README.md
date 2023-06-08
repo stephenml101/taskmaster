@@ -146,3 +146,26 @@
 - TODO: Adjust height so all of name displays
 
 ![Photo 6](./src/main/java/com/stephenml101/taskmaster/screenshots/lab36-6.png)
+
+
+## Lab 37
+
+- Added photo functionality to Add Task Page. See screenshots below:
+
+### New Add Task Page w/ photo icon in top right corner
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab37-1.png)
+
+
+### Android photo selection w/ photo
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab37-2.png)
+
+
+### S3 Storage w/ jpg name in bucket
+
+![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab37-3.png)
+
+### New photo on Add Task Page
+
+![Photo 4](./src/main/java/com/stephenml101/taskmaster/screenshots/lab37-4.png)
