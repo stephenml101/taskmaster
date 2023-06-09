@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
     public static final String TASK_DETAIL_EXTRA_TAG = "taskDetail";
 
+    public static String TASK_LOCATION_EXTRA_TAG = "taskLocation";
+
     private final String TAG = "MainActivity";
     List<Task> tasks;
     TaskListRecyclerViewAdapter adapter;
@@ -39,20 +41,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        Amplify.Auth.signUp("stephenlevesque2@gmail.com", // user email address as username in Cognito calls
-//                "steelers2", // Cognito's default password policy is 8 characters, no other requirements
-//                AuthSignUpOptions.builder()
-//                        .userAttribute(AuthUserAttributeKey.email(), "stephenlevesque2@gmail.com")
-//                        .userAttribute(AuthUserAttributeKey.nickname(), "Matt Damon")
-//                        .build(),
-//                good -> {
-//                    Log.i(TAG, "Signup succeeded: " + good.toString());
-//                },
-//                bad -> {
-//                    Log.i(TAG, "Signup failed with username: " + "stephenlevesque2@gmail.com" + "with this message: " + bad.toString());
-//                }
-//        );
 
 
         tasks = new ArrayList<>();

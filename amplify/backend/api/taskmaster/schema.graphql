@@ -16,6 +16,9 @@ type Task @model @auth(rules: [{allow: public}]) {
  dateCreated: AWSDateTime
  taskState: TaskStateEnum
  taskOwner: Team @belongsTo(fields: ["teamId"])
+ s3Key: String
+ latitude: String
+ longitude: String
 }
 
 enum TaskStateEnum {

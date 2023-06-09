@@ -17,6 +17,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail);
         setUpTaskName();
         setUpTaskDetails();
+        setUpLocationDetails();
     }
 
     public void setUpTaskName(){
@@ -48,6 +49,22 @@ public class TaskDetailActivity extends AppCompatActivity {
             taskDetailsInfoTextView.setText(taskDetail);
         } else {
             taskDetailsInfoTextView.setText(R.string.no_task_detail);
+        }
+    }
+
+    public void setUpLocationDetails(){
+        Intent callingIntent = getIntent();
+        String taskLocation = null;
+
+        if(callingIntent != null){
+            taskLocation = callingIntent.getStringExtra(MainActivity.TASK_LOCATION_EXTRA_TAG);
+        }
+
+        TextView taskDetailsInfoTextView = findViewById(R.id.LocationTextView);
+        if(taskLocation != null){
+            taskDetailsInfoTextView.setText(taskLocation);
+        } else {
+            taskDetailsInfoTextView.setText("No Location");
         }
     }
 }

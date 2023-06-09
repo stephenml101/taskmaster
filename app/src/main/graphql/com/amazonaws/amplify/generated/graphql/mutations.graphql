@@ -14,6 +14,9 @@ mutation CreateTeam(
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -38,6 +41,9 @@ mutation UpdateTeam(
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -62,6 +68,9 @@ mutation DeleteTeam(
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -91,6 +100,9 @@ mutation CreateTask(
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }
@@ -115,6 +127,9 @@ mutation UpdateTask(
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }
@@ -139,6 +154,9 @@ mutation DeleteTask(
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }
