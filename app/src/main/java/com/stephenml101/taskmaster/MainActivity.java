@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_NAME_EXTRA_TAG = "taskName";
     public static final String TASK_DETAIL_EXTRA_TAG = "taskDetail";
 
-    public static String TASK_LOCATION_EXTRA_TAG = "taskLocation";
+    public static String TASK_LATITUDE_EXTRA_TAG = "taskLatitude";
+
+    public static String TASK_LONGITUDE_EXTRA_TAG = "taskLongitude";
 
     private final String TAG = "MainActivity";
     List<Task> tasks;
