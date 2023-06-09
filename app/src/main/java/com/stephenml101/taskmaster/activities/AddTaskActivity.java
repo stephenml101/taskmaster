@@ -193,6 +193,7 @@ private Geocoder geocoder;
                     String currentLongitude = Double.toString(location.getLongitude());
                     Log.i(TAG, "Our latitude: " + location.getLatitude());
                     Log.i(TAG, "Our longitude: " + location.getLongitude());
+
                     newTask = Task.builder()
                             .name(taskName)
                             .description(description)

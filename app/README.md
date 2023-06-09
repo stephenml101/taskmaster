@@ -187,3 +187,7 @@ Lab 39
 ### No Location displayed. Was able to get that to show.
 
 ![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-3.png)
+
+## Lab 39 Update: Code fixed and location is showing on TaskDetailActivity
+
+![Photo 4](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-4.png)

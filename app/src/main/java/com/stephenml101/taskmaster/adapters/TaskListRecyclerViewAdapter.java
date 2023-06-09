@@ -61,6 +61,8 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
         TextView taskFragmentTextView = holder.itemView.findViewById(R.id.taskFragmentTextView);
         String taskName = tasks.get(position).getName();
         String taskDetail = tasks.get(position).getDescription();
+        String taskLatitude = tasks.get(position).getLatitude();
+        String taskLongitude = tasks.get(position).getLongitude();
 
         DateFormat dateCreatedIso8601InputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
         dateCreatedIso8601InputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -84,6 +86,9 @@ public class TaskListRecyclerViewAdapter extends RecyclerView.Adapter<TaskListRe
             Intent gotToTaskDetailIntent = new Intent(callingActivity, TaskDetailActivity.class);
             gotToTaskDetailIntent.putExtra(MainActivity.TASK_NAME_EXTRA_TAG, taskName);
             gotToTaskDetailIntent.putExtra(MainActivity.TASK_DETAIL_EXTRA_TAG, taskDetail);
+            gotToTaskDetailIntent.putExtra(MainActivity.TASK_LATITUDE_EXTRA_TAG, taskLatitude);
+            gotToTaskDetailIntent.putExtra(MainActivity.TASK_LONGITUDE_EXTRA_TAG, taskLongitude);
+
             callingActivity.startActivity(gotToTaskDetailIntent);
         });
     }

@@ -54,15 +54,17 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     public void setUpLocationDetails(){
         Intent callingIntent = getIntent();
-        String taskLocation = null;
+        String taskLatitude = null;
+        String taskLongitude = null;
 
         if(callingIntent != null){
-            taskLocation = callingIntent.getStringExtra(MainActivity.TASK_LOCATION_EXTRA_TAG);
+            taskLatitude = callingIntent.getStringExtra(MainActivity.TASK_LATITUDE_EXTRA_TAG);
+            taskLongitude = callingIntent.getStringExtra(MainActivity.TASK_LONGITUDE_EXTRA_TAG);
         }
 
         TextView taskDetailsInfoTextView = findViewById(R.id.LocationTextView);
-        if(taskLocation != null){
-            taskDetailsInfoTextView.setText(taskLocation);
+        if(taskLatitude!= null && taskLongitude != null){
+            taskDetailsInfoTextView.setText("Location: " + taskLatitude + ", " + taskLongitude);
         } else {
             taskDetailsInfoTextView.setText("No Location");
         }
