@@ -4,13 +4,18 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -28,14 +33,24 @@ import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.stephenml101.taskmaster.R;
 //import com.stephenml101.taskmaster.models.Tasks;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -47,10 +62,13 @@ Spinner teamSpinner;
 
 CompletableFuture<List<Team>> teamFuture = new CompletableFuture<>();
 ActivityResultLauncher<Intent> activityResultLauncher;
-
 private String s3Key;
+
+private FusedLocationProviderClient fusedLocationProviderClient;
 ArrayList<String> teamNames;
 ArrayList<Team> team;
+
+private Geocoder geocoder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,14 +98,79 @@ ArrayList<Team> team;
                 }
         );
 
+        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+
         setUpAddTaskButton();
         setupImageButton();
+
+        fusedLocationProviderClient.flushLocations();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            Log.e(TAG, "Application does not have access to either ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION!");
+            return;
+        }
+
+        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, new CancellationToken() {
+            @NonNull
+            @Override
+            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                return null;
+            }
+
+            @Override
+            public boolean isCancellationRequested() {
+                return false;
+            }
+        }).addOnSuccessListener(location -> {
+            if(location == null) {
+                Log.e(TAG, "Location callback was null");
+            } else {
+                String currentLatitude = Double.toString(location.getLatitude());
+                String currentLongitude = Double.toString(location.getLongitude());
+                Log.i(TAG, "Our current latitude: " + currentLatitude);
+                Log.i(TAG, "Our current longitude: " + currentLongitude);
+            }
+        });
+
+        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
+                .build();
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                try {
+                    String address = geocoder.getFromLocation(
+                                    locationResult.getLastLocation().getLatitude(),
+                                    locationResult.getLastLocation().getLongitude(),
+                                    1)
+                            .get(0)
+                            .getAddressLine(0);
+
+                    Log.i(TAG, "Repeating  current location is: " + address);
+                } catch (IOException ioe) {
+                    Log.e(TAG, "Could not get subscribed location: " + ioe.getMessage());
+                }
+            }
+        };
+
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
 
     }
 
     public void setUpAddTaskButton(){
 
         findViewById(R.id.addTaskButtonPageTwo).setOnClickListener(view -> {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                Log.e(TAG, "Application does not have access to either ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION!");
+                return;
+            }
             String selectedTeamStringName = teamSpinner.getSelectedItem().toString();
             try {
                 team = (ArrayList<Team>) teamFuture.get();
@@ -98,21 +181,40 @@ ArrayList<Team> team;
             Team selectedTeam = team.stream().filter(eachTeam -> eachTeam.getName().equals(selectedTeamStringName)).findAny().orElseThrow(RuntimeException::new);
             String taskName = ((EditText)findViewById(R.id.editTextBoxTaskTitle)).getText().toString();
             String description = ((EditText)findViewById(R.id.editTextBoxTaskDescription)).getText().toString();
-//
-            Task newTask = Task.builder()
-                    .name(taskName)
-                    .description(description)
-                    .dateCreated(new Temporal.DateTime(new Date(), 0))
-                    .taskState((TaskStateEnum)addTaskSpinner.getSelectedItem())
-                    .taskOwner(selectedTeam)
-                    .build();
-            Amplify.API.mutate(
-                    ModelMutation.create(newTask),
-                    successResponse -> Log.i(TAG, "AddTaskActivity.onCreate().setUpAddTaskButton(): made a new task successfully!"),
-                    failureResponse -> Log.i(TAG, "AddTaskActivity.onCreate().setUpAddTaskButton(): failed with this response: " + failureResponse)
-            );
 
-           Toast.makeText(this, "Task saved!", Toast.LENGTH_LONG).show();
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+                // "location" here should be null if no one has ever requested location prior!
+                // Try running Google Maps first and clicking your current location button if you have a null callback here, or a null object when getting lat/long
+                Task newTask = null;
+                if (location == null) {
+                    Log.e(TAG, "Location callback was null!");
+                } else {
+                    String currentLatitude = Double.toString(location.getLatitude());
+                    String currentLongitude = Double.toString(location.getLongitude());
+                    Log.i(TAG, "Our latitude: " + location.getLatitude());
+                    Log.i(TAG, "Our longitude: " + location.getLongitude());
+                    newTask = Task.builder()
+                            .name(taskName)
+                            .description(description)
+                            .dateCreated(new Temporal.DateTime(new Date(), 0))
+                            .taskState((TaskStateEnum) addTaskSpinner.getSelectedItem())
+                            .taskOwner(selectedTeam)
+                            .s3Key(s3Key)
+                            .latitude(currentLatitude)
+                            .longitude(currentLongitude)
+                            .build();
+                }
+                Amplify.API.mutate(
+                        ModelMutation.create(newTask),
+                        successResponse -> Log.i(TAG, "AddTaskActivity.onCreate().setUpAddTaskButton(): made a new task successfully!"),
+                        failureResponse -> Log.i(TAG, "AddTaskActivity.onCreate().setUpAddTaskButton(): failed with this response: " + failureResponse)
+                );
+
+                Toast.makeText(this, "Task saved!", Toast.LENGTH_LONG).show();
+            });
+//
+
+
         });
 
 

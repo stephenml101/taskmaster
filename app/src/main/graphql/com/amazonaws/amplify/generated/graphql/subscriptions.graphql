@@ -11,6 +11,9 @@ subscription OnCreateTeam($filter: ModelSubscriptionTeamFilterInput) {
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -32,6 +35,9 @@ subscription OnUpdateTeam($filter: ModelSubscriptionTeamFilterInput) {
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -53,6 +59,9 @@ subscription OnDeleteTeam($filter: ModelSubscriptionTeamFilterInput) {
         description
         dateCreated
         taskState
+        s3Key
+        latitude
+        longitude
         createdAt
         updatedAt
       }
@@ -79,6 +88,9 @@ subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }
@@ -100,6 +112,9 @@ subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }
@@ -121,6 +136,9 @@ subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
       createdAt
       updatedAt
     }
+    s3Key
+    latitude
+    longitude
     createdAt
     updatedAt
   }

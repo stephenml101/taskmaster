@@ -169,3 +169,21 @@
 ### New photo on Add Task Page
 
 ![Photo 4](./src/main/java/com/stephenml101/taskmaster/screenshots/lab37-4.png)
+
+
+Lab 39
+
+- Location enabled
+- Was able to get it to show up on LogCat but not the taskDetailPage
+
+### Location Permission
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-1.png)
+
+### Logcat Location
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-2.png)
+
+### No Location displayed. Was able to get that to show.
+
+![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-3.png)
