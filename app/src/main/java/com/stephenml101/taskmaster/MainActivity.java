@@ -13,18 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.predictions.models.LanguageType;
 import com.stephenml101.taskmaster.activities.AddTaskActivity;
 import com.stephenml101.taskmaster.activities.AllTasksActivity;
 import com.stephenml101.taskmaster.activities.SettingsPageActivity;
 import com.stephenml101.taskmaster.adapters.TaskListRecyclerViewAdapter;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +44,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AnalyticsEvent openAppEvent = AnalyticsEvent.builder()
+                .name("openedApp")
+                .addProperty("time", Long.toString(new Date().getTime()))
+                .addProperty("trackingEvent", "main activity opened")
+                .build();
+
+        Log.i(TAG, "created event: " + openAppEvent.getName());
+
+        Amplify.Analytics.recordEvent(openAppEvent);
+
+        Amplify.Predictions.translateText(
+                "I like to eat spaghetti",
+//                LanguageType.ENGLISH,
+//                LanguageType.SPANISH,
+                result -> Log.i("MyAmplifyApp", result.getTranslatedText()),
+                error -> Log.e("MyAmplifyApp", "Translation failed", error)
+        );
+
 
         tasks = new ArrayList<>();
 
@@ -51,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setUpRecyclerView();
         setUpAddTaskButton();
         setUpAllTasksButton();
+
 
     }
 

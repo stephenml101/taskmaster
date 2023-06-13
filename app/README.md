@@ -191,3 +191,26 @@ Lab 39
 ## Lab 39 Update: Code fixed and location is showing on TaskDetailActivity
 
 ![Photo 4](./src/main/java/com/stephenml101/taskmaster/screenshots/lab39-4.png)
+
+
+## Lab 41
+
+- Added analytics for when the app is opened (see screenshot of AWS Pinpoint)
+
+- Added speak button, no errors occur when button is pressed
+
+- Translate text to spanish added to MainActivity for Second Predictions Integration
+
+### AWS Pinpoint
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab41-1.png)
+
+### Speak Button
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab41-2.png)
+
+### Text Translate
+
+![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab41-3.png)
+
+

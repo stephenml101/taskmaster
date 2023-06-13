@@ -34,4 +34,5 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="location_text_view">Location</string>
+    <string name="speak">Speak</string>
 </resources>
