@@ -34,6 +34,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         setUpTaskName();
         setUpTaskDetails();
         setUpLocationDetails();
+        setUpSpeakButton();
     }
 
     public void setUpTaskName(){
