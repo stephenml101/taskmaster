@@ -35,4 +35,6 @@
     <string name="logout">Logout</string>
     <string name="location_text_view">Location</string>
     <string name="speak">Speak</string>
+    <string name="insterstitial_ad">Interstitial Ad</string>
+    <string name="rewarded_ad">Reward Ad</string>
 </resources>

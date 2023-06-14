@@ -214,3 +214,22 @@ Lab 39
 ![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab41-3.png)
 
 
+## Lab 42
+
+- All methods added for Interstitial Ad and Rewards Ad, as well as the Banner Ad
+
+- There was an issue with Google AdMob. I could not update my information because the page would not load. I attached a screenshot.
+
+- I believe that is why I have an error on my ap and it will not load. Please see the error below:
+
+### Error
+
+![Photo 1](./src/main/java/com/stephenml101/taskmaster/screenshots/lab42-1.png)
+
+### AdMob issue
+
+![Photo 2](./src/main/java/com/stephenml101/taskmaster/screenshots/lab42-2.png)
+
+### Layout of what MainActivity should look like
+
+![Photo 3](./src/main/java/com/stephenml101/taskmaster/screenshots/lab42-3.png)
